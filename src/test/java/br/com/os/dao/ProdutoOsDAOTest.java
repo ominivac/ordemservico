@@ -13,7 +13,7 @@ import br.com.os.domain.ProdutoOS;
 public class ProdutoOsDAOTest {
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		//TESTADO - OK  BANCO GERANDO AUTOINCREMENTO - 13/05  
 		

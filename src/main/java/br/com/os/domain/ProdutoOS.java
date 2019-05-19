@@ -27,7 +27,6 @@ public class ProdutoOS implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_produto", columnDefinition= "serial", unique=true, nullable=false)
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long codigoProduto;

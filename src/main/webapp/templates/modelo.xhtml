@@ -13,7 +13,8 @@
 	<title>Sistema de Ordem de Serviço</title>
 	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
 	<h:outputStylesheet library="primefaces-my-custom-theme" name="theme.css"/> 
-	
+	<!-- configuracao abaixo para o calendario em Pt-Br -->
+	<script type="text/javascript" src="pt.js"></script>
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </h:head>
 <h:body>
@@ -55,7 +56,7 @@
 
 					<p:submenu label="CADASTROS">
 						<p:menuitem value="CADASTRO DE USUÁRIOS" 
-							url="/pages/usuarios.xhtml" />
+							url="/pages/usuarios2.xhtml" />
 						
 						<p:menuitem value="CADASTRO DE SERVIÇOS" 
 							url="/pages/produtoItemOs.xhtml" />
@@ -67,7 +68,7 @@
 							url="/pages/novaOs2.xhtml" />
 						
 						<p:menuitem value="FECHAMENTO DO MÊS." 
-							url="/pages/fechamentoperiodo.xhtml" />		
+							url="/pages/fechamentoperiodonovo.xhtml" />		
 							
 					</p:submenu>
 

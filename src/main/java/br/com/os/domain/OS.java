@@ -27,22 +27,22 @@ import br.com.os.converter.SampleEntity;
 
 @Entity
 @Table(name="os")
+
 @NamedQueries({
 	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
-	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataSolicitacao DESC"),
-	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" ),
+	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataSolicitacao ASC"),
+	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOS = :codigo" ),
 	@NamedQuery(name="OS.buscarPorServico", query= "SELECT os FROM OS os WHERE os.atividade LIKE :atividade" ),	
 	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
-public class OS implements Serializable,SampleEntity{
+public class OS implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_os", columnDefinition= "serial", unique=true, nullable=false)
 	@GeneratedValue(strategy= GenerationType.IDENTITY )
-	private Integer codigoOs;
+	private Integer codigoOS;
 	
 	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
 	private List<Item> itensOs;
@@ -78,22 +78,26 @@ public class OS implements Serializable,SampleEntity{
 	private String  atividade;
 
 	
-	public Integer getCodigo() {
-		return codigoOs;
+	public Integer getCodigoOS() {
+		return codigoOS;
+	}
+	
+	public void setCodigoOS(Integer codigo) {
+		this.codigoOS = codigo;
 	}
 	
 	public String getCodigoFormatado() {
 		
-		if(codigoOs <10) {
-			return "2018.094-00" + codigoOs;
+		if(codigoOS <10) {
+			return "2018.094-00" + codigoOS;
 		}
 		
-		if(codigoOs >=10 && codigoOs < 100) {
-			return "2018.094-0" + codigoOs;
+		if(codigoOS >=10 && codigoOS < 100) {
+			return "2018.094-0" + codigoOS;
 		}
 		
-		if(codigoOs >=100) {
-			return "2018.094-"+codigoOs.toString();
+		if(codigoOS >=100) {
+			return "2018.094-"+codigoOS.toString();
 		}
 		
 		return "";
@@ -116,9 +120,7 @@ public class OS implements Serializable,SampleEntity{
 	
 	
 
-	public void setCodigo(Integer codigo) {
-		this.codigoOs = codigo;
-	}
+	
 	
 		
 	public String getAtividade() {
@@ -198,7 +200,7 @@ public class OS implements Serializable,SampleEntity{
 
 	@Override
 	public String toString() {
-		return "OS [codigoOs=" + codigoOs + ", itensOs=" + itensOs + ", dataSolicitacao=" + dataSolicitacao
+		return "OS [codigoOS=" + codigoOS + "\n, itensOs=" + itensOs + ", \n dataSolicitacao=" + dataSolicitacao
 				+ ", dataPrevisaoEntrega=" + dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario
 				+ ", aberta=" + aberta + ", atividade=" + atividade + "]";
 	}
@@ -207,7 +209,7 @@ public class OS implements Serializable,SampleEntity{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoOs == null) ? 0 : codigoOs.hashCode());
+		result = prime * result + ((codigoOS == null) ? 0 : codigoOS.hashCode());
 		return result;
 	}
 
@@ -221,10 +223,10 @@ public class OS implements Serializable,SampleEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		OS other = (OS) obj;
-		if (codigoOs == null) {
-			if (other.codigoOs != null)
+		if (codigoOS == null) {
+			if (other.codigoOS != null)
 				return false;
-		} else if (!codigoOs.equals(other.codigoOs))
+		} else if (!codigoOS.equals(other.codigoOS))
 			return false;
 		return true;
 	}

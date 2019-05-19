@@ -237,34 +237,11 @@ public class OsDAO {
 		return listaOS;
 	}
 	
-	
-	
-	public OS buscarPorCodigo(Integer codigo){
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		OS os  = null;
-		Query consulta = null;
-		
-		
-		try {
-			consulta = sessao.getNamedQuery("OS.buscarPorCodigo");
-			consulta.setInteger("codigo",codigo);
-			os =  (OS) consulta.uniqueResult();
-			
-		}catch (RuntimeException ex) {
-
-			throw ex;
-		}finally {
-			sessao.close();
-		}
-		return os;
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<OS> buscarPorAtividade(String atividade){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		List<OS> listaOS  = null;
 		Query consulta = null;
-		
 		
 		try {
 			consulta = sessao.getNamedQuery("OS.buscarPorServico");
@@ -280,6 +257,29 @@ public class OsDAO {
 		return listaOS;
 	}
 	
+	
+	public OS buscarPorCodigo(Integer codigo){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		OS os  = new OS();
+		Query consulta ;
+		
+		try {
+			consulta = sessao.getNamedQuery("OS.buscarPorCodigo");
+			consulta.setInteger("codigo", codigo);
+			os =  (OS) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return os;
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<OS> buscarPorAtividadeItem(String atividade){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		List<OS> listaOS  = null;

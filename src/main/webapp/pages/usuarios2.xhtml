@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+	<f:metadata>
+		<f:viewAction action="#{usuarioBean.listar}"></f:viewAction>
+	</f:metadata>
+	
+		<h:form id="formListagemUsuario" target="_blank">
+			<p:panel header="Usuários - Listagem">
+				<p:dataTable id="tabelaUsuario" emptyMessage="Nenhum registro encontrado."
+					value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
+					
+					<f:facet name="footer">
+							
+							
+								
+															
+					</f:facet>
+					
+					<p:column headerText="Id" width="10%">
+						<h:outputText value="#{usuario.codigoUsuario}" />
+					</p:column>
+					
+					<p:column headerText="Nome" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+					
+					<p:column headerText="EMAIL" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+					
+					<p:column headerText="SENHA" >
+						<h:outputText value="#{usuario.senha}" />
+					</p:column>
+					
+					<p:column headerText="TIPO" >
+						<h:outputText value="#{usuario.role}" />
+					</p:column>
+					
+					<p:column headerText="Opções" width="25%">
+					
+						<p:commandButton value="Editar" icon="ui-icon-pencil" 
+							actionListener="#{usuarioBean.editar}" 
+							update=":formCadastroUsuario:pnlFormCadUsuario"
+							oncomplete="PF('dlgNovoUsuario').show();">
+							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
+							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						</p:commandButton>
+						
+						<p:commandButton value="Desabilitar" icon="ui-icon-trash"
+							actionListener="#{usuarioBean.excluir}">
+							
+							<p:confirm header="Confirmação" message="Deseja desabiltar Usuário ?"
+								icon="ui-icon-alert"/>
+							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>	
+																
+						</p:commandButton>
+						
+					</p:column>
+				
+				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+				</p:confirmDialog>
+				
+			</p:panel>
+		</h:form>
+		
+		<!-- Inicio dlgUsuario -->
+		<p:dialog widgetVar="dlgNovoUsuario" draggable="false" appendTo="@(body)" showEffect="clip" hideEffect="clip"
+			resizable="false" modal="true" header="Usuários - Cadastro">
+			<h:form id="formCadastroUsuario">
+				<h:panelGrid id="pnlFormCadUsuario" columns="2">
+				
+					<p:outputLabel for="txtNome" value="Nome: " />
+					<p:inputText id="txtNome" value="#{usuarioBean.usuario.nome}"
+						size="30" maxlength="100" required="true"
+						requiredMessage="o campo nome é obrigatório!" />
+
+					<p:outputLabel for="txtEmail" value="Email: " />
+					<p:inputText id="txtEmail" value="#{usuarioBean.usuario.email}"
+						size="30" maxlength="100" required="true"
+						validatorMessage="email invalido"
+						requiredMessage="o campo nome é obrigatório!">
+
+						<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+					</p:inputText>
+
+					<p:outputLabel for="txtSenha" value="Senha: " />
+					<p:password id="txtSenha"
+						value="#{usuarioBean.usuario.senhaSemCripto}" size="10"
+						maxlength="8" required="true" match="txtSenha2"
+						validatorMessage="Os campos senha tem de ser iguais"
+						requiredMessage="o campo senha é obrigatório!" />
+
+					<p:outputLabel for="txtSenha2" value="Repita a Senha: " />
+					<p:password id="txtSenha2" required="true" size="10" maxlength="8" />
+
+					<p:outputLabel for="sltRole" value="Tipo Usuário: " />
+					<h:selectOneMenu id="sltRole" value="#{usuarioBean.usuario.role}"
+						required="true" requiredMessage="o campo tipo é obrigatório!">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um tipo" />
+
+						<f:selectItems value="#{roleBean.roles}" var="role"
+							itemValue="#{role}" itemLabel="#{role.label}" />
+
+					</h:selectOneMenu>
+
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" icon="ui-icon-save"
+						actionListener="#{usuarioBean.salvar}"
+						oncomplete="PF('dlgNovoUsuario').hide();"
+						update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagemUsuario:tabelaUsuario "/>
+					
+					<p:commandButton value="Fechar" icon="ui-icon-close" type="button"
+						onclick="PF('dlgNovoUsuario').hide();"
+						oncomplete=""/>
+				</h:panelGrid>
+				
+			</h:form>
+		
+		</p:dialog>
+		<!-- Fim dlgUsuario -->
+		
+	
+	</ui:define>
+</ui:composition>

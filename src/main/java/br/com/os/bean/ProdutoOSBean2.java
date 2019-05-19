@@ -99,7 +99,7 @@ public class ProdutoOSBean2 implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	public void carregarEdicao() {
 		try {
 			System.out.println("codido do produto" + codigoProduto);
@@ -111,7 +111,7 @@ public class ProdutoOSBean2 implements Serializable {
 				Messages.addGlobalError("Erro editar produto de os");
 				e.printStackTrace();
 			}
-	}
+	} */
 	
 
 	public void gerarRelatorio() {
@@ -255,6 +255,7 @@ public class ProdutoOSBean2 implements Serializable {
 
 			ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
 			produtoDAO.merge(produtoOS);
+			
 			produtosOS = produtoDAO.listar();
 
 			Messages.addGlobalInfo("Item de OS editado com sucesso");

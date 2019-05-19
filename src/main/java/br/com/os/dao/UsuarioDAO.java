@@ -61,7 +61,6 @@ public class UsuarioDAO {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		
-		
 		try {
 			transacao = sessao.beginTransaction();
 			sessao.update(usuario);
@@ -160,7 +159,7 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
-	public Usuario buscarPorCodigo(Integer codigo){
+	public Usuario buscarPorCodigo(Long codigo){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Usuario usuario  = null;
 		Query consulta = null;
@@ -168,7 +167,7 @@ public class UsuarioDAO {
 		
 		try {
 			consulta = sessao.getNamedQuery("Usuario.buscarPorCodigo");
-			consulta.setInteger("codigo",codigo);
+			consulta.setLong("codigo",codigo);
 			usuario =  (Usuario) consulta.uniqueResult();
 			
 		}catch (RuntimeException ex) {

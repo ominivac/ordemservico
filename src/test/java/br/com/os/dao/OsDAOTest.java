@@ -21,7 +21,7 @@ import br.com.os.filter.OSFilter;
 public class OsDAOTest {
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void salvar() {
 		OS os = new OS();
 		os.setDataSolicitacao(new Date() );
@@ -29,7 +29,7 @@ public class OsDAOTest {
 		
 		
 		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.buscarPorCodigo(2);
+		Usuario u = udao.buscarPorCodigo(2L);
 		
 		os.setUsuario(u);
 		/*
@@ -135,10 +135,12 @@ public class OsDAOTest {
 	@Test
 	@Ignore
 	public void listarPorAtividade() {
-		//TESTADO - OK 
+		System.out.println("teste junit listarPorAtividade");
+		//TESTADO - OK 18/05/19
 		OsDAO osDAO = new OsDAO();
-		List<OS> listaOs = osDAO.buscarPorAtividade("NORDESTE");
+		List<OS> listaOs = osDAO.buscarPorAtividade("DVD");
 		
+		System.out.println("Tamanhao da lista " + listaOs.size() );
 		System.out.println(listaOs);
 		
 	}
@@ -146,20 +148,22 @@ public class OsDAOTest {
 	@Test
 	@Ignore
 	public void listarPorAtividadeItem() {
+		System.out.println("teste junit listarPorAtividadeItem");
 		//TESTADO - OK 
 		OsDAO osDAO = new OsDAO();
-		List<OS> listaOs = osDAO.buscarPorAtividadeItem("GRAVAÇÃO");
+		List<OS> listaOs = osDAO.buscarPorAtividadeItem("Gravação");
 		
+		System.out.println("Tamanhao da lista" + listaOs.size() );
 		System.out.println(listaOs);
 		
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void buscarPorCodigo() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();
-		OS os = osDAO.buscarPorCodigo(27);
+		OS os = osDAO.buscarPorCodigo(2);
 		System.out.println(os);
 	}
 	

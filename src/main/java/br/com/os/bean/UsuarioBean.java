@@ -66,6 +66,8 @@ public class UsuarioBean implements Serializable{
 	}
 	
 	
+	
+	
 	public void salvar() {
 		System.out.println("usuario em salvar " + usuario);
 		try {
@@ -103,18 +105,19 @@ public class UsuarioBean implements Serializable{
 	public void editar(ActionEvent evento) {
 		try {
 			usuario = (Usuario) evento.getComponent().getAttributes().get("usuarioSelecionado");
-
+			System.out.println("usuario a editar: " + usuario);
 			
 			UsuarioDAO udao = new UsuarioDAO();
 			udao.editar(usuario);
+			//udao.merge(usuario);
 			
 			usuarios = udao.listar();
 
-			Messages.addGlobalInfo("Usuário editado com sucesso");
+			Messages.addGlobalInfo("Usuário editado com sucesso !");
 
 			// Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao editar item de OS");
+			Messages.addGlobalError("Erro ao editar usuário !");
 			e.printStackTrace();
 		}
 	}

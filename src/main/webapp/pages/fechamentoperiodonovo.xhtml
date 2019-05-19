@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formPesquisa"
+			style="margin:auto; margin-left:2%; font-size: 12px;">
+
+			<p:panel header="Pesquisa de OS" styleClass="ui-widget">
+				<!-- https://stackoverflow.com/questions/10447974/selectoneradio-and-disable-inputtext -->
+
+
+				<h:panelGroup id="inputs" columns="2" style="margin-bottom:10px"
+					cellpadding="5">
+					<p:outputLabel for="opcao" value="Pesquisa por:" />
+
+					<p:selectOneRadio id="opcao" value="#{osBeanNovo.tipoPesquisa}">
+						<f:selectItem itemLabel="Por Código da  OS." itemValue="1" />
+						<f:selectItem itemLabel="Por Serviço" itemValue="2" />
+						<f:selectItem itemLabel="Intervalo de datas" itemValue="3" />
+						<f:ajax render="inputs" />
+
+					</p:selectOneRadio>
+
+					<p:panel id="pnl1" rendered="#{osBeanNovo.tipoPesquisa == '1'}">
+						<p:inputText id="txtCodigo"
+							value="#{osBeanNovo.ordemServicoPesquisa.codigoOS}" />
+						<p:commandButton value="Pesquisar"
+							actionListener="#{osBeanNovo.listarPorCodigo()}"
+							update=":formPesquisa:tabela-registros" />
+					</p:panel>
+					<p:panel id="pnl2" rendered="#{osBeanNovo.tipoPesquisa == '2'}">
+						<p:inputText id="txtAtividade"
+							value="#{osBeanNovo.ordemServicoPesquisa.atividade}" />
+						<p:commandButton value="Pesquisar"
+							actionListener="#{osBeanNovo.listarPorAtividade()}"
+							update=":formPesquisa:tabela-registros" />
+
+					</p:panel>
+					<p:panel id="pnl3" rendered="#{osBeanNovo.tipoPesquisa == '3'}">
+						<p:outputLabel  value="Data Inicial:  " />
+						<p:calendar id="txtdata_inicial" title="Data Inicial" 
+							required="true" requiredMessage="È necessário um valor para Data Inicial !" />
+											
+						<p:outputLabel  value="Data Final:  " />
+						<p:calendar id="txtdata_final"  title="Data Iinal"
+							required="true" requiredMessage="È necessário um valor para Data Final !" />
+						<p:commandButton value="Pesquisar" />
+					</p:panel>
+
+				</h:panelGroup>
+			</p:panel>
+			<p:dataTable id="tabela-registros" var="os" rowKey="#{os.codigoOS}"
+				selection="#{osBeanNovo.listaOsFiltradas}"
+				rowSelectMode="add"
+				value="#{osBeanNovo.listaOsFiltradas}" rows="5" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" style="width:98%;">
+				
+				<f:facet name="footer">
+
+				</f:facet>
+				
+				<p:column selectionMode="multiple" />
+				
+				<p:column headerText="Código" style="width: 10%">
+					<h:outputText value="#{os.codigoFormatado}" />
+				</p:column>
+
+				<p:column headerText="Atividade" style="width: 35%">
+					<h:outputText value="#{os.atividade}" />
+				</p:column>
+
+				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}"
+					style="width: 20%x">
+					<h:outputText value="#{os.usuario.nome}" />
+				</p:column>
+
+				<p:column headerText="Data Lançamento">
+					<h:outputText value="#{os.dataSolicitacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Data previsão entrega">
+					<h:outputText value="#{os.dataPrevisaoEntrega}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+
+				
+				<p:column styleClass="colunas" headerText="Imprimir">
+					<p:commandButton value="Imprimir" icon="ui-icon-print"
+						rendered="true" ajax="false"
+						actionListener="#{osBeanNovo.gerarRelatorio}" target="_blank">
+
+						<f:attribute name="osSelecionada" value="#{os}" />
+
+					</p:commandButton>
+				</p:column>
+
+
+			</p:dataTable>
+			
+		</h:form>
+
+
+		<p:spacer />
+
+		
+
+		<!-- tela para CRUD -->
+		
+
+
+		
+
+		
+
+
+
+	</ui:define>
+
+</ui:composition>
+

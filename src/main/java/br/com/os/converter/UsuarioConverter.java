@@ -19,7 +19,8 @@ public class UsuarioConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String valor) {
 		System.out.println("getAsObject " + valor);
 		try {
-			Integer codigo = Integer.parseInt(valor);
+			//Integer codigo = Integer.parseInt(valor);
+			Long codigo = Long.parseLong(valor);
 			UsuarioDAO udao = new UsuarioDAO();
 			Usuario usuario = udao.buscarPorCodigo(codigo);
 			return usuario;

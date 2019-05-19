@@ -243,9 +243,9 @@ public class OsBeanNovo implements Serializable {
 			servletOutputStream = response.getOutputStream();
 			Connection conexao = HibernateUtil.getConexao();
 			Map<String, Object> parametros = new HashMap<String, Object>();
-			System.out.println("codigo os to print" + osToPrint.getCodigo() );
+			System.out.println("codigo os to print" + osToPrint.getCodigoOS() );
 			
-			parametros.put("cod_os", osToPrint.getCodigo() );
+			parametros.put("cod_os", osToPrint.getCodigoOS() );
 			
 
 			// JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)),
@@ -290,6 +290,7 @@ public class OsBeanNovo implements Serializable {
 	public void listarPorCodigo() {
 		try{
 			OsDAO osdao = new OsDAO();
+			ordemServicoPesquisa = new OS();
 			//ordemServicoPesquisa = new OS();
 			listaOsFiltradas = new ArrayList<OS>();
 			
@@ -297,7 +298,7 @@ public class OsBeanNovo implements Serializable {
 			
 			if(tipoPesquisa == 1) {
 				System.out.println("tipo pesquisa por codigo");
-				ordemServicoPesquisa  = osdao.buscarPorCodigo(ordemServicoPesquisa.getCodigo() );
+				ordemServicoPesquisa  = osdao.buscarPorCodigo(ordemServicoPesquisa.getCodigoOS() );
 				System.out.println(ordemServicoPesquisa);
 				listaOsFiltradas.add(ordemServicoPesquisa);
 				
@@ -327,7 +328,7 @@ public class OsBeanNovo implements Serializable {
 			
 			
 		}catch (Exception e) {
-			Messages.addGlobalError("erro pesquisar por código da OS !");
+			Messages.addGlobalError("erro pesquisar por atividade da OS !");
 			e.printStackTrace();
 		}
 	}
@@ -338,6 +339,7 @@ public class OsBeanNovo implements Serializable {
 		//System.out.println("entrou no metodo");
 		try {
 			OsDAO osdao = new OsDAO();
+			ordemServicoPesquisa = new OS();
 			
 			
 			//String data_inicial = "1/1/2018";
@@ -698,9 +700,9 @@ public class OsBeanNovo implements Serializable {
 			System.out.println("itens dentro de salvar"+ itensOs);
 			
 			OsDAO osdao = new OsDAO();
-			System.out.println(ordemServico.getCodigo() );
+			System.out.println(ordemServico.getCodigoOS() );
 			
-			if(ordemServico.getCodigo() == null) {
+			if(ordemServico.getCodigoOS() == null) {
 				//eh uma os nova entao salva
 				osdao.salvar(ordemServico, itensOs);
 				listaOs = osdao.listar();

@@ -1,5 +1,7 @@
 package br.com.os.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,12 +26,12 @@ import javax.persistence.Transient;
 	@NamedQuery(name="Usuario.buscarPorEmail", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email = :email" ),
 	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email =:email AND usuario.senha =:senha" )
 })
-public class Usuario  {
+public class Usuario  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
-	//@Column(name = "cod_usuario", columnDefinition= "serial", unique=true, nullable=false)
-	@Column(name = "cod_usuario", nullable=false)
+	@Column(name = "cod_usuario",columnDefinition= "serial", unique=true, nullable=false) //este eh responsavel pelo autogenerator da PK
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long codigoUsuario;
 

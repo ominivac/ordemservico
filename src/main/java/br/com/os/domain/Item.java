@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name="Item.listar", query= "SELECT item FROM Item item"),
 	@NamedQuery(name="Item.buscarPorCodigoItem", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" ),
-	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOs = :codOS AND i.codigoItem = :codItem" )
+	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOS = :codOS AND i.codigoItem = :codItem" )
 })
 public class Item implements Serializable {
 	

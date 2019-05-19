@@ -37,7 +37,7 @@
 					</f:facet>
 					
 					<p:column headerText="Id" width="10%">
-						<h:outputText value="#{produto.codigo}" />
+						<h:outputText value="#{produto.codigoProduto}" />
 					</p:column>
 					
 					<p:column headerText="Descrição" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
@@ -90,6 +90,7 @@
 		
 		</h:form>
 	
+		<!-- Inicio dlgProduto -->
 		<p:dialog widgetVar="dlgProduto" draggable="false" appendTo="@(body)" showEffect="clip" hideEffect="clip"
 			resizable="false" modal="true" header="Itens de OS - Cadastro">
 			<h:form id="formCadastroProduto">
@@ -129,6 +130,6 @@
 			</h:form>
 		
 		</p:dialog>
-	
+		<!-- Fim dlgProduto -->
 	</ui:define>
 </ui:composition>

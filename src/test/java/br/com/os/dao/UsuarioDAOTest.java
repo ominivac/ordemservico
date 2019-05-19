@@ -15,10 +15,11 @@ import br.com.os.domain.Usuario;
 public class UsuarioDAOTest {
 	
 	@Test
-	//@Ignore
+    @Ignore
 	public void salvar() {
 		// TESTADO SEM ID - BANCO GERANDO AUTOINCREMENTO COM TIPO LONG - 13/05  
 		
+		/*
 		Usuario u1 = new Usuario();
 		u1.setNome("Roberto Sousa");
 		u1.setRole(Role.ADMINISTRADOR);
@@ -38,14 +39,23 @@ public class UsuarioDAOTest {
 		SimpleHash hash2 = new SimpleHash("md5", u2.getSenhaSemCripto() );
 		u2.setSenha(hash2.toHex() );
 		
+		*/
+		
+		
+		Usuario u3 = new Usuario();
+		u3.setNome("admin");
+		u3.setRole(Role.ADMINISTRADOR);
+		u3.setEmail("francisco@gmail.com");
+		u3.setSenhaSemCripto("fco123");
+		
+		SimpleHash hash2 = new SimpleHash("md5", u3.getSenhaSemCripto() );
+		u3.setSenha(hash2.toHex() );
+		
+		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		usuarioDAO.salvar(u1);
-		usuarioDAO.salvar(u2);
+		usuarioDAO.salvar(u3);
 		
 	}
-	
-	
-	
 	
 	@Test
 	@Ignore
@@ -92,8 +102,7 @@ public class UsuarioDAOTest {
 		System.out.println(u);
 		
 	}
-	
-	
+		
 	@Test
 	@Ignore
 	public void mergeIncluir() {
@@ -128,8 +137,34 @@ public class UsuarioDAOTest {
 	//TESTADO - OK
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		System.out.println(usuarioDAO.buscarPorCodigo(11) );
+		System.out.println(usuarioDAO.buscarPorCodigo(4L) );
 	}
+	
+	@Test
+	//@Ignore
+	public void editar() {
+	//TESTADO - OK	18/05/2019
+		Long cod = 4L;
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+		
+		Usuario uEditado = new Usuario();
+		uEditado = usuarioDAO.buscarPorCodigo(cod);
+		
+		
+		uEditado.setNome("teste editado dao");
+		uEditado.setEmail("teste_edit@yahoo.com.br");
+		uEditado.setSenhaSemCripto("teste");
+		
+		SimpleHash hash1 = new SimpleHash("md5", uEditado.getSenhaSemCripto() );
+		uEditado.setSenha(hash1.toHex() );
+		
+		uEditado.setRole(Role.ADMINISTRADOR);
+	
+		
+		usuarioDAO.editar(uEditado);
+	}
+	
 	
 	@Test
 	@Ignore

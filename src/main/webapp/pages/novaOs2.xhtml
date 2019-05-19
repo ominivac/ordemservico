@@ -71,7 +71,7 @@
 							value="#{osBeanNovo.produtosOS}" var="produto" paginator="true">
 
 							<p:column headerText="Código" style="width: 50px">
-								<h:outputText value="#{produto.codigo}" />
+								<h:outputText value="#{produto.codigoProduto}" />
 							</p:column>
 
 							<p:column headerText="Retranca" filterBy="#{produto.descricao}">
@@ -112,7 +112,7 @@
 								value="#{osBeanNovo.itensOs}" var="item" paginator="true">
 
 								<p:column headerText="Código" style="width: 50px">
-									<h:outputText value="#{item.codigo}" />
+									<h:outputText value="#{item.codigoItem}" />
 								</p:column>
 
 								<p:column headerText="Retranca" style="width: 80px">
@@ -188,7 +188,10 @@
 					<p:inputTextarea value="#{osBeanNovo.itemCrudEdit.atividadeItem}" />
 					
 					<p:outputLabel value="Data realização:" />
-					<p:calendar value="#{osBeanNovo.itemCrudEdit.dataEntrega}" />
+					<p:calendar value="#{osBeanNovo.itemCrudEdit.dataEntrega}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+							timeZone="America/Sao_Paulo" />
+					</p:calendar>
 					
 					<p:outputLabel value="Ano ref." />
 					<p:inputText value="#{osBeanNovo.produtoOSselecionado.anoReferencia}"

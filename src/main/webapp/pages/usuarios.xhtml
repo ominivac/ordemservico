@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -18,13 +19,13 @@
 							<p:commandButton value="Novo Usuário" icon="ui-icon-plus"
 								actionListener="#{usuarioBean.novo}"
 								update=":formCadastroUsuario:pnlFormCadUsuario"
-								oncomplete="PF('dlgUsuario').show();">
+								oncomplete="PF('dlgUsuarioNovo').show();">
 								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 							</p:commandButton>	
 						</f:facet>
 					
 					<p:column headerText="CÓDIGO">
-						<h:outputText value="#{usuario.codigo}" />
+						<h:outputText value="#{usuario.codigoUsuario}" />
 					</p:column>
 					
 					<p:column headerText="NOME" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
@@ -49,7 +50,7 @@
 						<p:commandButton value="Editar" icon="ui-icon-pencil"
 							actionListener="#{usuarioBean.editar}" 
 							update=":formCadastroUsuario:pnlFormCadUsuario"
-							oncomplete="PF('dlgUsuario').show();">
+							oncomplete="PF('dlgUsuarioEditar').show();">
 							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						</p:commandButton>
@@ -77,13 +78,13 @@
 				
 			</p:panel>
 		</h:form>
-	
-	<p:dialog widgetVar="dlgUsuario" draggable="false"  showEffect="clip" hideEffect="clip"
-		resizable="false" modal="true" header="Usuários - Cadastro">
+	<!-- Dialog Novo Usuario -->
+	<p:dialog widgetVar="dlgUsuarioNovo" draggable="false"  showEffect="clip" hideEffect="clip"
+		resizable="false" modal="true" header="Usuários - Novo">
 		
-		<p:growl id="mensagemAlteraSenha" autoUpdate="false"/>
+		<p:growl id="mensagemNovoUsuario" autoUpdate="false"/>
 		
-		<h:form id="formCadastroUsuario">
+		<h:form id="formNovoUsuario">
 			<h:panelGrid id="pnlFormCadUsuario" columns="2">
 		
 				<p:outputLabel for="txtNome" value="Nome: "/>
@@ -122,18 +123,21 @@
 				<h:form id="formSalvar">
 					<p:commandButton id="btnSalvar" value="Salvar" 
 						actionListener="#{usuarioBean.salvar}"
-						oncomplete="PF('dlgUsuario').hide();"
-						update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela ">
+						oncomplete="PF('dlgUsuarioNovo').hide();"
+						update=":mensagem: formNovoUsuario:pnlFormCadUsuario :formListagem:tabela ">
 						
 						
 					</p:commandButton>
 					
 					<p:commandButton value="Fechar" type="button"
-						onclick="PF('dlgUsuario').hide();"/>
+						onclick="PF('dlgUsuarioNovo').hide();"/>
 				</h:form>
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>
+	<!-- fim dialog novo usuario -->
+	
+	
 	
 	</ui:define>
 </ui:composition>	
