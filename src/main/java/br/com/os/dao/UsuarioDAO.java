@@ -63,7 +63,7 @@ public class UsuarioDAO {
 		
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.update(usuario);
+			sessao.saveOrUpdate(usuario);
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {
