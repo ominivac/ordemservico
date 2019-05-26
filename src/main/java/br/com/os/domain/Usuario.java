@@ -26,13 +26,14 @@ import javax.persistence.Transient;
 	@NamedQuery(name="Usuario.buscarPorEmail", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email = :email" ),
 	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email =:email AND usuario.senha =:senha" )
 })
+@SequenceGenerator(name="generator_usuario",sequenceName="usuario_id_usuario_seq", allocationSize=1)
 public class Usuario  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "cod_usuario",columnDefinition= "serial", unique=true, nullable=false) //este eh responsavel pelo autogenerator da PK
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(generator="generator_usuario")
+	@Column(name = "codigo_usuario")
 	private Long codigoUsuario;
 
 	

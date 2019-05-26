@@ -35,13 +35,14 @@ import br.com.os.converter.SampleEntity;
 	@NamedQuery(name="OS.buscarPorServico", query= "SELECT os FROM OS os WHERE os.atividade LIKE :atividade" ),	
 	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
+@SequenceGenerator(name="generator_os",sequenceName="os_id_os_seq", allocationSize=1)
 public class OS implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "cod_os", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.IDENTITY )
+	@GeneratedValue(generator="generator_os")
+	@Column(name = "codigo_os")
 	private Integer codigoOS;
 	
 	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
@@ -62,7 +63,7 @@ public class OS implements Serializable{
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="usuario_cod",referencedColumnName="cod_usuario",columnDefinition="integer", nullable = true)
+	@JoinColumn(name="usuario_cod",referencedColumnName="codigo_usuario",columnDefinition="integer", nullable = true)
 	//a opcao columnDefinition é necessaria, caso contrario o campo sera criado como not null. bug versao hibernate?
 	// https://stackoverflow.com/questions/15511899/cannot-make-manytoone-relationship-nullable / https://hibernate.atlassian.net/browse/HHH-8229
 	private Usuario usuario;

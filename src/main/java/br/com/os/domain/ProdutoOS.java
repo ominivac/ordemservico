@@ -21,14 +21,15 @@ import javax.persistence.Table;
 	@NamedQuery(name="ProdutoOS.buscarPorCodigo", query= "SELECT produtoOs FROM ProdutoOS produtoOs WHERE produtoOs.codigoProduto = :codigo" )
 	
 })
+@SequenceGenerator(name="generator_produto",sequenceName="produto_id_produto_seq", allocationSize=1)
 public class ProdutoOS implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "cod_produto", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(generator="generator_produto")
+	@Column(name = "codigo_produto")
 	private Long codigoProduto;
 
 	

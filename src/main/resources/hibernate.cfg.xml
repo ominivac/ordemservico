@@ -11,7 +11,7 @@
 		<!-- Settings for local development -->
 		 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost/ordemservicobd2</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost/ordemservicobd3</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
 		 

@@ -21,15 +21,17 @@ import br.com.os.filter.OSFilter;
 public class OsDAOTest {
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		OS os = new OS();
+	    os.setAberta(false);
+	    os.setAtividade("TESTE DAO 2");
 		os.setDataSolicitacao(new Date() );
 		os.setDataPrevisaoEntrega(new Date());
 		
 		
 		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.buscarPorCodigo(2L);
+		Usuario u = udao.buscarPorCodigo(1L);
 		
 		os.setUsuario(u);
 		/*

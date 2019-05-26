@@ -29,14 +29,14 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name="Item.buscarPorCodigoItem", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" ),
 	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOS = :codOS AND i.codigoItem = :codItem" )
 })
+@SequenceGenerator(name="generator_item",sequenceName="item_id_item_seq", allocationSize=1)
 public class Item implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
-	@Column(name = "cod_item", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(generator="generator_item")
+	@Column(name = "codigo_item")
 	private Long codigoItem;
 
 	
@@ -71,11 +71,11 @@ public class Item implements Serializable {
 	private BigDecimal valorParcial;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="produto_cod",  referencedColumnName="cod_produto", nullable = false)
+	@JoinColumn(name="produto_cod",  referencedColumnName="codigo_produto", nullable = false)
 	private ProdutoOS produtoOS;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="os_cod", referencedColumnName="cod_os",  nullable = false)
+	@JoinColumn(name="os_cod", referencedColumnName="codigo_os",  nullable = false)
 	private OS os;
 
 	
