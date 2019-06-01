@@ -29,27 +29,26 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name="Item.buscarPorCodigoItem", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" ),
 	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOS = :codOS AND i.codigoItem = :codItem" )
 })
-//@SequenceGenerator(name="generator_item",sequenceName="item_id_item_seq", allocationSize=1)
+
 public class Item implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@GeneratedValue(generator="generator_item")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_item")
-	private Integer codigoItem;
+	private Long codigoItem;
 
 	
 	
 	
 	
 
-	public Integer getCodigoItem() {
+	public Long getCodigoItem() {
 		return codigoItem;
 	}
 
-	public void setCodigoItem(Integer codigoItem) {
+	public void setCodigoItem(Long codigoItem) {
 		this.codigoItem = codigoItem;
 	}
 

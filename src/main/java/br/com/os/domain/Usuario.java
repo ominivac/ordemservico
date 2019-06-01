@@ -11,13 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 
-
-@SuppressWarnings("serial")
 @Entity()
 @Table(name="usuario")
 @NamedQueries({
@@ -26,7 +23,7 @@ import javax.persistence.Transient;
 	@NamedQuery(name="Usuario.buscarPorEmail", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email = :email" ),
 	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email =:email AND usuario.senha =:senha" )
 })
-//@SequenceGenerator(name="generator_usuario",sequenceName="usuario_id_usuario_seq", allocationSize=1)
+
 public class Usuario  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -35,15 +32,17 @@ public class Usuario  implements Serializable {
 	//@GeneratedValue(generator="generator_usuario")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_usuario")
-	private Integer codigoUsuario;
+	private Long codigoUsuario;
 
 	
+	
+	
 
-	public Integer getCodigoUsuario() {
+	public Long getCodigoUsuario() {
 		return codigoUsuario;
 	}
 
-	public void setCodigoUsuario(Integer codigoUsuario) {
+	public void setCodigoUsuario(Long codigoUsuario) {
 		this.codigoUsuario = codigoUsuario;
 	}
 

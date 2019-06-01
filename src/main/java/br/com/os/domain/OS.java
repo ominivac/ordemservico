@@ -35,16 +35,14 @@ import br.com.os.converter.SampleEntity;
 	@NamedQuery(name="OS.buscarPorServico", query= "SELECT os FROM OS os WHERE os.atividade LIKE :atividade" ),	
 	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
-//@SequenceGenerator(name="generator_os",sequenceName="os_id_os_seq", allocationSize=1)
 public class OS implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	//@GeneratedValue(generator="generator_os")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_os")
-	private Integer codigoOS;
+	private Long codigoOS;
 	
 	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
 	private List<Item> itensOs;
@@ -80,11 +78,11 @@ public class OS implements Serializable{
 	private String  atividade;
 
 	
-	public Integer getCodigoOS() {
+	public Long getCodigoOS() {
 		return codigoOS;
 	}
 	
-	public void setCodigoOS(Integer codigo) {
+	public void setCodigoOS(Long codigo) {
 		this.codigoOS = codigo;
 	}
 	
