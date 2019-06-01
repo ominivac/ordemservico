@@ -26,23 +26,24 @@ import javax.persistence.Transient;
 	@NamedQuery(name="Usuario.buscarPorEmail", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email = :email" ),
 	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email =:email AND usuario.senha =:senha" )
 })
-@SequenceGenerator(name="generator_usuario",sequenceName="usuario_id_usuario_seq", allocationSize=1)
+//@SequenceGenerator(name="generator_usuario",sequenceName="usuario_id_usuario_seq", allocationSize=1)
 public class Usuario  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(generator="generator_usuario")
+	//@GeneratedValue(generator="generator_usuario")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_usuario")
-	private Long codigoUsuario;
+	private Integer codigoUsuario;
 
 	
-	
-	public Long getCodigoUsuario() {
+
+	public Integer getCodigoUsuario() {
 		return codigoUsuario;
 	}
 
-	public void setCodigoUsuario(Long codigoUsuario) {
+	public void setCodigoUsuario(Integer codigoUsuario) {
 		this.codigoUsuario = codigoUsuario;
 	}
 

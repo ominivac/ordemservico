@@ -35,7 +35,7 @@ public class UsuarioConverter implements Converter {
 		System.out.println("getAsObject " + objeto);
 		try {
 			Usuario usuario = (Usuario)objeto;
-			Long codigo = usuario.getCodigoUsuario();
+			Integer codigo = usuario.getCodigoUsuario();  
 			return codigo.toString();
 			
 			

@@ -9,9 +9,11 @@
     <param-name>primefaces.THEME</param-name>
     <param-value>my-custom-theme</param-value>
   </context-param>
+
   <listener>
-    <listener-class>br.com.os.util.HibernateContexto</listener-class>
+     <listener-class>br.com.os.util.HibernateContexto</listener-class>
   </listener>
+  
   <welcome-file-list>
     <welcome-file>pages/principal.xhtml</welcome-file>
   </welcome-file-list>

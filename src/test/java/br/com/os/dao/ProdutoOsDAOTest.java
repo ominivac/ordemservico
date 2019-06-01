@@ -52,7 +52,7 @@ public class ProdutoOsDAOTest {
 	public void editar() {
 		// TESTADO - OK 
 		ProdutoOS produtoOS = new ProdutoOS();
-		produtoOS.setCodigoProduto(1L);
+		produtoOS.setCodigoProduto(1); 
 		produtoOS.setDescricao("produto p1 teste editado");
 		produtoOS.setAnoReferencia("2012");
 		produtoOS.setValorPorHora(new BigDecimal("156.35"));
@@ -66,7 +66,7 @@ public class ProdutoOsDAOTest {
 	public void excluir() {
 		// TESTADO - OK 
 		ProdutoOS produtoOS = new ProdutoOS();
-		produtoOS.setCodigoProduto(1L);
+		produtoOS.setCodigoProduto(1);
 		
 		ProdutoOsDAO pdao = new ProdutoOsDAO();
 		pdao.excluir(produtoOS);;

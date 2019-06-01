@@ -35,13 +35,14 @@ import br.com.os.converter.SampleEntity;
 	@NamedQuery(name="OS.buscarPorServico", query= "SELECT os FROM OS os WHERE os.atividade LIKE :atividade" ),	
 	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
-@SequenceGenerator(name="generator_os",sequenceName="os_id_os_seq", allocationSize=1)
+//@SequenceGenerator(name="generator_os",sequenceName="os_id_os_seq", allocationSize=1)
 public class OS implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(generator="generator_os")
+	//@GeneratedValue(generator="generator_os")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_os")
 	private Integer codigoOS;
 	

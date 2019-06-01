@@ -173,7 +173,7 @@ public class UsuarioDAOTest {
 	@Ignore
 	public void deletar() {
 	//TESTADO - OK	
-		Long cod = 2L;
+		Integer cod = 2;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario udeletado = new Usuario();
 		udeletado.setNome("rer");
