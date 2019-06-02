@@ -79,7 +79,7 @@ public class OsDAOTest {
 		OsDAO osDAO = new OsDAO();
 		
 		//pesquisa a os que deseja edicao pelo cod
-		os = osDAO.buscarPorCodigo(7);
+		os = osDAO.buscarPorCodigo(7L);
 		
 		System.out.println(os);
 		
@@ -165,7 +165,7 @@ public class OsDAOTest {
 	public void buscarPorCodigo() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();
-		OS os = osDAO.buscarPorCodigo(2);
+		OS os = osDAO.buscarPorCodigo(2L); 
 		System.out.println(os);
 	}
 	

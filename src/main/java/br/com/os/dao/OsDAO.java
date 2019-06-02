@@ -258,14 +258,14 @@ public class OsDAO {
 	}
 	
 	
-	public OS buscarPorCodigo(Integer codigo){
+	public OS buscarPorCodigo(Long codigo){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		OS os  = new OS();
 		Query consulta ;
 		
 		try {
 			consulta = sessao.getNamedQuery("OS.buscarPorCodigo");
-			consulta.setInteger("codigo", codigo);
+			consulta.setLong("codigo", codigo);
 			os =  (OS) consulta.uniqueResult();
 			
 		}catch (RuntimeException ex) {

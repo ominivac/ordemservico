@@ -23,7 +23,7 @@ public class ItemDAOTest {
 		ProdutoOS produtoOS2 = pdao.buscarPorCodigo(3);
 		
 		OsDAO osdao = new OsDAO();
-		OS os = osdao.buscarPorCodigo(19);
+		OS os = osdao.buscarPorCodigo(19L);
 		
 		Item item1 = new Item();
 		item1.setProdutoOS(produtoOS1);
@@ -57,7 +57,7 @@ public class ItemDAOTest {
 	@Test
 	public void listarItensDeUmaOS() {
 		OsDAO odao = new OsDAO();
-		OS os = odao.buscarPorCodigo(7);
+		OS os = odao.buscarPorCodigo(7L);
 		List<Item> itens  = new ArrayList<Item>();
 		itens = os.getItensOs();
 		for(int i=0 ; i< itens.size() ; i++) {

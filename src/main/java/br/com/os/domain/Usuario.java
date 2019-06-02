@@ -30,7 +30,7 @@ public class Usuario  implements Serializable {
 	
 	@Id
 	//@GeneratedValue(generator="generator_usuario")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "codigo_usuario")
 	private Long codigoUsuario;
 
