@@ -5,9 +5,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.context.FacesContext;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
@@ -58,8 +59,13 @@ public class AutenticacaoBean implements Serializable{
 			UsuarioDAO udao = new UsuarioDAO();
 			usuarioLogado =  udao.login(usuario.getNome() , usuario.getSenhaSemCripto() );
 			if(usuarioLogado == null) {
-				Messages.addGlobalError("Nome de usuário ou senha inválidas" );
+				//Messages.addGlobalError("Nome de usuário ou senha inválidas" );
+				FacesContext.getCurrentInstance().
+					addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+				    "Nome de usuário ou senha inválidos !" ,"Nome de usuário ou senha inválidos !"));
+				Messages.addGlobalInfo("Nome de usuário ou senha inválidas");
 				//Faces.redirect("./pages/autenticacao.xhtml");
+				System.out.println("foiiiiii");
 			}
 			
 			Faces.redirect("./pages/principal.xhtml");

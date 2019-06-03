@@ -16,23 +16,28 @@
 </h:head>
 <h:body>
 
-	<p:growl id="mensagem"/>
+	<p:messages />
+	<p:growl id="mensagem" autoUpdate="true"/>
 
 	<p:dialog widgetVar="dlgAutenticar" styleClass="ui-dialog-titlebar" header="Autenticação" visible="true" closable="false"
 		draggable="false" resizable="false"  modal="true" width="800px">
 		<h:form id="formAutenticar">
 	
-			<h:panelGrid columns="2">
-				<p:outputLabel for="nome" value="Login" size="20"/>
-				<p:inputText id="nome"  maxlength="20" size="20" onfocus="@this" value="#{autenticacaoBean.usuario.nome}"
-					required="true" requiredMessage="O campo nome é obrigatório"/>
+			<h:panelGrid columns="3">
+				<p:outputLabel for="txtNome" value="Login" size="20"/>
+				<p:inputText id="txtNome"  maxlength="20" size="20" onfocus="@this" value="#{autenticacaoBean.usuario.nome}"
+					promptLabel="Campo Usuário é requerido." required="true" requiredMessage="O campo nome é obrigatório"/>
 				
-				<p:outputLabel for="senha" value="Senha"/>
-				<p:password id="senha" maxlength="20" size="20" value="#{autenticacaoBean.usuario.senhaSemCripto}"
-					required="true" requiredMessage="O campo senha é obrigatório"/>
+				<h:message for="txtNome" showDetail="true"/>
+				
+				<p:outputLabel for="txtSenha" value="Senha"/>
+				<p:password id="txtSenha" maxlength="20" size="20" value="#{autenticacaoBean.usuario.senhaSemCripto}"
+					promptLabel="Campo Senha é requerido. " required="true" requiredMessage="O campo senha é obrigatório"/>
+					
+				<h:message for="txtSenha" showDetail="true"/>	
 					
 				<p:commandButton widgetVar="btnEntrar" value="Entrar"
-					update=":mensagem" 
+					update=":mensagem" ajax="true"
 					actionListener="#{autenticacaoBean.autenticar}"/>
 				
 				<p:commandButton value="Resetar Senha"  oncomplete="PF('dlgResetEmail').show();"/>		

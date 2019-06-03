@@ -57,7 +57,7 @@
 					<p:column headerText="Opções" width="25%">
 					
 						<p:commandButton value="Editar" icon="ui-icon-pencil" 
-							actionListener="#{produtoOSBean2.editar}" 
+							actionListener="#{produtoOSBean2.merge}" 
 							update=":formCadastroProduto:pnlFormCadProduto"
 							oncomplete="PF('dlgProduto').show();">
 							<f:attribute name="produtoSelecionado" value="#{produto}"/>

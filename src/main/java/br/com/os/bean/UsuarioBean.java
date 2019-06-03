@@ -108,8 +108,8 @@ public class UsuarioBean implements Serializable{
 			System.out.println("usuario a editar: " + usuario);
 			
 			UsuarioDAO udao = new UsuarioDAO();
-			udao.editar(usuario);
-			//udao.merge(usuario);
+			//udao.editar(usuario);
+			udao.merge(usuario);
 			
 			usuarios = udao.listar();
 

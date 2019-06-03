@@ -19,7 +19,19 @@
 					value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
 					
 					<f:facet name="footer">
-							
+						<p:commandButton value="Novo" icon="ui-icon-plus" 
+						actionListener="#{usuarioBean.novo}"
+								update=":formCadastroUsuario:pnlFormCadUsuario"
+								oncomplete="PF('dlgNovoUsuario').show();">
+								
+								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						
+							</p:commandButton>
+								
+							<p:commandButton value="Imprimir" icon="ui-icon-print" 
+								ajax="false"
+								actionListener="#{produtoOSBean2.gerarRelatorio}"
+								target = "_blank"/>
 							
 								
 															

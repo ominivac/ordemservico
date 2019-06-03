@@ -76,8 +76,12 @@ public class OS implements Serializable{
 	
 	@Column(name="atividade", length=255,  nullable = true)
 	private String  atividade;
-
 	
+	
+	
+		
+	
+
 	public Long getCodigoOS() {
 		return codigoOS;
 	}

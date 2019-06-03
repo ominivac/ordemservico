@@ -249,7 +249,7 @@ public class ProdutoOSBean2 implements Serializable {
 		}
 	}
 
-	public void editar(ActionEvent evento) {
+	public void merge(ActionEvent evento) {
 		try {
 			produtoOS = (ProdutoOS) evento.getComponent().getAttributes().get("produtoSelecionado");
 
