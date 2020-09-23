@@ -18,7 +18,7 @@ import br.com.os.dao.UsuarioDAO;
 import br.com.os.domain.Usuario;
 
 
-@ManagedBean
+@ManagedBean(name = "login")
 @SessionScoped
 public class AutenticacaoBean implements Serializable{
 
@@ -27,7 +27,7 @@ public class AutenticacaoBean implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
-	private Usuario usuarioLogado;
+	
 	
 	
 	public Usuario getUsuario() {
@@ -38,34 +38,36 @@ public class AutenticacaoBean implements Serializable{
 		this.usuario = usuario;
 	}
 	
-	public Usuario getUsuarioLogado() {
-		return usuarioLogado;
-	}
-	
-	public void setUsuarioLogado(Usuario usuarioLogado) {
-		this.usuarioLogado = usuarioLogado;
-	}
 	
 	
 	@PostConstruct
 	public void iniciar() {
 		usuario = new Usuario();
-		usuarioLogado = new Usuario();
+	}
+	
+	
+	public void login() {
+		try {
+			Faces.redirect("./pages/principal.xhtml");
+		} catch (IOException e) {
+			Messages.addGlobalError("Nome de usuário ou senha inválidas");
+			e.printStackTrace();
+		}
 	}
 	
 	
 	public void autenticar() {
 		try {
 			UsuarioDAO udao = new UsuarioDAO();
-			usuarioLogado =  udao.login(usuario.getNome() , usuario.getSenhaSemCripto() );
-			if(usuarioLogado == null) {
+			usuario =  udao.login(usuario.getNome() , usuario.getSenhaSemCripto() );
+			if(usuario == null) {
 				//Messages.addGlobalError("Nome de usuário ou senha inválidas" );
 				FacesContext.getCurrentInstance().
 					addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 				    "Nome de usuário ou senha inválidos !" ,"Nome de usuário ou senha inválidos !"));
 				Messages.addGlobalInfo("Nome de usuário ou senha inválidas");
-				//Faces.redirect("./pages/autenticacao.xhtml");
-				System.out.println("foiiiiii");
+				Faces.redirect("./pages/autenticacao.xhtml");
+				//System.out.println("foiiiiii");
 			}
 			
 			Faces.redirect("./pages/principal.xhtml");
@@ -77,12 +79,12 @@ public class AutenticacaoBean implements Serializable{
 	}
 	
 	public boolean ehadmin() {
-		return usuarioLogado.getRole().toString().equals("A");
+		return usuario.getRole().toString().equals("A");
 	}
 	
 	public void sair() {
 		System.out.println("entrou em sair");
-		usuarioLogado = null;
+		usuario = null;
 		try {
 			Faces.redirect("./pages/autenticacao.xhtml");
 		} catch (IOException e) {
@@ -95,7 +97,7 @@ public class AutenticacaoBean implements Serializable{
 	public boolean temPermisssoes(List<String> permissoes) {
 		
 		for(String permissao : permissoes) {
-			if(usuarioLogado.getRole().toString().equals(permissao)) {
+			if(usuario.getRole().toString().equals(permissao)) {
 				return true;
 			}
 		}

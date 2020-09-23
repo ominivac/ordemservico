@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+
+
+	<converter>
+		<converter-for-class>java.lang.Enum</converter-for-class>
+		<converter-class>javax.faces.convert.EnumConverter</converter-class>
+	</converter>
+	
+	<!-- 
+	
+	<converter>
+    	<description>Responsavel Converter</description>
+    	<converter-id>responsavelConverter</converter-id>
+    	<converter-class>br.com.os.converter.ResponsavelConverter</converter-class>
+	</converter>
+	 -->
+	 
+	 <!-- Definição  do PhaseListener para autenticação -->
+	 <lifecycle>
+	 	<phase-listener>br.com.os.listener.AutenticacaoListener</phase-listener>
+	 </lifecycle>
+	 
+	 
+
+</faces-config>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b2be1c2c-ef32-46c5-bf4c-ff23fe97cb00">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cHJvZHV0b19vcyBBUyAsNTQ5LDEwMSw0MDgzOTFiMC05NDQ1LTRlMmQtYTJlNy0yYWZlMzZhYWI0
+NWU7aXRlbSBBUyAsMjcwLDgxLGE2ZTJhOTY4LThlMzEtNDBjZC1hYzQwLTQxOTZjYWU3NjRlMjt1
+c3VhcmlvIEFTICw1NTcsMjY0LDc3Y2Q2YjFlLTA1MDYtNDM3YS04ODBmLWMyMjRjMTFmYmFlZDtv
+cyBBUyAsNzAsNzcsOTNhNzk1NWQtNzgyZi00YThlLWE0ZGItNDM1YWI0ZDU5YWZmOw==
+]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="298"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="693"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ordemservicobd2dapdater"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT os.cod_os,
+	os.data_previsao,
+	os.data_solicitacao,
+	os.atividade,
+	item.quantidade,
+	item.quantidade_horas,
+	item.data_entrega,
+	item.atividadeitem,
+	item.valor_parcial,
+	produto_os.descricao,
+	produto_os.valorporhora,
+	usuario.nome
+FROM item
+	INNER JOIN os ON 
+	 item.os_cod = os.cod_os 
+	INNER JOIN produto_os ON 
+	 item.produto_cod = produto_os.cod_produto 
+	INNER JOIN usuario ON 
+	 os.usuario_cod = usuario.cod_usuario]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

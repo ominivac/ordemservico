@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 95% ;
+	font-style: bold;
+}
+
+.overlayDialog div.ui-dialog-titlebar{
+	
+}
+
+.ui-dialog-titlebar{
+	height: 85%;
+	width: 100%
+	font-size: 85% ;
+	font-weight: bold;
+}
+
+.ui-dialog-title-dialog{
+	height: 85%;
+	width: 100%
+	font-size: 80% ;
+	font-weight: bold;
+}
+
+
+.ui-panel-titlebar.ui-widget-header{
+	height: 100%;
+	width: 100%
+}
+
+.imagemCentralizada{
+	display: block;
+	margim-left: auto;
+	margim-right: auto;
+}
+
+.divTopo{
+	padding-bottom: 5px;
+	pause-after: 5px;
+}
+
+.panel{
+	font-size: 75% ;
+	font-weight: bold;
+	height: 100%;
+	width: 80%
+}
+
+.divCabecalho{
+	padding-bottom: 25px;
+	pause-after: 10px;
+}
+
+.tabela{
+	font-size: 95% ;
+	font-weight: bold;
+	padding-bottom: 10px;
+	pause-after: 10px;
+	height: 80%;
+	width: 100%
+}
+
+.colunas{
+	font-size: 95% ;
+	font-weight: bold;
+	padding-bottom: 10px;
+	pause-after: 10px;
+	height: 80%;
+	width: 100%
+}
+
+
+
+

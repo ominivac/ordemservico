@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+	<f:metadata>
+		<f:viewAction action="#{produtoOSBean2.listar}"></f:viewAction>
+	</f:metadata>
+	
+		<h:form id="formListagem" target="_blank">
+			<p:panel header="Itens de OS - Listagem">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					value="#{produtoOSBean2.produtosOS}" var="produto" paginator="true">
+					
+					<f:facet name="footer">
+							
+							<p:commandButton value="Novo" icon="ui-icon-plus"
+								actionListener="#{produtoOSBean2.novo()}"
+								update=":formCadastroProduto:pnlFormCadProduto"
+								oncomplete="PF('dlgProduto').show();">
+								
+								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						
+							</p:commandButton>
+								
+							<p:commandButton value="Imprimir" icon="ui-icon-print" 
+								ajax="false"
+								actionListener="#{produtoOSBean2.gerarRelatorio}"
+								target = "_blank"/>	
+								
+					</f:facet>
+					
+					<p:column headerText="Id" width="10%">
+						<h:outputText value="#{produto.codigoProduto}" />
+					</p:column>
+					
+					<p:column headerText="Descrição" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
+						<h:outputText value="#{produto.descricao}" />
+					</p:column>
+					
+					<p:column headerText="Valor por hora" >
+						<h:outputText value="#{produto.valorPorHora}" >
+							<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Ano de ref." sortBy="#{produto.anoReferencia}" filterBy="#{produto.anoReferencia}">
+						<h:outputText value="#{produto.anoReferencia}" />
+					</p:column>
+					
+					<p:column headerText="Opções" width="25%">
+					
+						<p:commandButton value="Editar" icon="ui-icon-pencil" 
+							actionListener="#{produtoOSBean2.merge}" 
+							update=":formCadastroProduto:pnlFormCadProduto"
+							oncomplete="PF('dlgProduto').show();">
+							<f:attribute name="produtoSelecionado" value="#{produto}"/>
+							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						</p:commandButton>
+						
+						<p:commandButton value="Excluir" icon="ui-icon-trash"
+							actionListener="#{produtoOSBean2.excluir}"
+							update=":mensagem :formListagem:tabela">
+							
+							<p:confirm header="Confirmação" message="Deseja excluir o Item de OS ?"
+								icon="ui-icon-alert"/>
+							<f:attribute name="produtoSelecionado" value="#{produto}"/>	
+																
+						</p:commandButton>
+						
+					</p:column>
+				
+				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+				</p:confirmDialog>
+				
+			</p:panel>
+		
+		</h:form>
+	
+		<!-- Inicio dlgProduto -->
+		<p:dialog widgetVar="dlgProduto" draggable="false" appendTo="@(body)" showEffect="clip" hideEffect="clip"
+			resizable="false" modal="true" header="Itens de OS - Cadastro">
+			<h:form id="formCadastroProduto">
+				<h:panelGrid id="pnlFormCadProduto" columns="2">
+			
+					<p:outputLabel value="Retranca: "/>
+					<p:inputText value="#{produtoOSBean2.produtoOS.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" 
+						 size="50" maxlength="100"/>
+					
+					
+					<p:outputLabel value="Valor por Hora: "/>
+					<p:inputText value="#{produtoOSBean2.produtoOS.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"
+						converterMessage="o valor deve ser no formato XX,YY" size="30" maxlength="100"
+						validatorMessage="O valor mínimo para o campo valor deve ser 1,00">
+						
+						<f:validateDoubleRange minimum="1.00"/>
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</p:inputText>
+					
+					
+					<p:outputLabel value="Ano de referência: "/>
+					<p:inputText value="#{produtoOSBean2.produtoOS.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" 
+						converterMessage="o valor deve ser inteiro - formato XXXX" size="30" maxlength="100"/>
+				
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" icon="ui-icon-save"
+						actionListener="#{produtoOSBean2.salvar}"
+						oncomplete="PF('dlgProduto').hide();"
+						update=":mensagem: formCadastroProduto:pnlFormCadProduto :formListagem:tabela "/>
+					
+					<p:commandButton value="Fechar" icon="ui-icon-close" type="button"
+						onclick="PF('dlgProduto').hide();"
+						oncomplete=""/>
+				</h:panelGrid>
+				
+			</h:form>
+		
+		</p:dialog>
+		<!-- Fim dlgProduto -->
+	</ui:define>
+</ui:composition>

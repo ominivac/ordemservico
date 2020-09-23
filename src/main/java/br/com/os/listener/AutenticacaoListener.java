@@ -27,7 +27,7 @@ public class AutenticacaoListener implements PhaseListener{
 				return;
 			}
 			
-			Usuario usuario = autenticacaBean.getUsuarioLogado();
+			Usuario usuario = autenticacaBean.getUsuario();
 			if(usuario == null) {
 				Faces.navigate("/pages/autenticacao.xhtml");
 				return;

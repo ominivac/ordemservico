@@ -15,7 +15,7 @@ import br.com.os.domain.Usuario;
 public class UsuarioDAOTest {
 	
 	@Test
-   // @Ignore
+    @Ignore
 	public void salvar() {
 		// TESTADO SEM ID - BANCO GERANDO AUTOINCREMENTO COM TIPO LONG - 13/05  
 		
@@ -80,22 +80,22 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void autenticar() {
-		String  nome = "Maria Rita";
-		String  senha = "maria123";
+		String  nome = "robertokbs@gmail.com";
+		String  senha = "1q2w3e";
 		
 		UsuarioDAO udao = new UsuarioDAO();
 		Usuario u = udao.login(nome, senha);
 		
-		System.out.println(u);
+		System.out.println("usuario logado teste" + u);
 		
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void login() {
-		//String  email = "cris.torres@gmail.com";
+		
 		String  email = "robertokbs@gmail.com";
-		//String  senha = "cris123";
+	
 		String  senha = "1q2w3e";
 		
 		UsuarioDAO udao = new UsuarioDAO();
